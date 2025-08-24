@@ -14,10 +14,10 @@
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
 
-    /* HERO */
+    /* HERO (shrunk so it won't cover the form) */
     .hero{
       position:relative; overflow:hidden; color:#fff; text-align:center;
-      padding:64px 16px 120px;
+      padding:56px 16px 64px; /* smaller bottom padding so nothing is hidden */
       background:linear-gradient(135deg,rgba(37,99,235,.92),rgba(124,58,237,.92)),
                  url('https://images.unsplash.com/photo-1582582429416-90cb8f1cba2d?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
     }
@@ -25,7 +25,7 @@
     .hero p{margin:0;opacity:.95;font-size:clamp(14px,2.2vw,18px)}
 
     /* WRAP + CARD */
-    .wrap{max-width:1000px;margin:-80px auto 40px;padding:0 16px}
+    .wrap{max-width:1000px;margin:-48px auto 40px;padding:0 16px} /* overlaps a bit for nice effect */
     .card{
       background:var(--card); border-radius:16px; padding:24px;
       box-shadow:0 18px 40px rgba(15,23,42,.15);
@@ -35,7 +35,7 @@
 
     .intro h2{margin:0 0 10px; color:var(--ink); font-size:clamp(22px,2.6vw,28px)}
     .bullets{margin:6px 0 0; padding:0; list-style:none; color:#475569}
-    .bullets li{margin:6px 0}
+    .bullets li{margin:6px 0; display:flex; align-items:center}
     .check{display:inline-block;width:18px;height:18px; border-radius:50%; background:#22c55e; color:#fff; text-align:center; line-height:18px; font-size:12px; margin-right:8px}
 
     /* FORM */
@@ -44,7 +44,11 @@
       width:100%; padding:12px 14px; border:1px solid #d1d5db; border-radius:10px; font-size:16px; background:#fff
     }
     form textarea{min-height:110px; grid-column:1/-1; resize:vertical}
-    .btn{grid-column:1/-1; background:var(--brand); color:#fff; border:none; padding:14px 16px; border-radius:12px; font-size:17px; cursor:pointer; font-weight:700}
+    .btn{
+      grid-column:1/-1; background:var(--brand); color:#fff; border:none;
+      padding:12px 14px; border-radius:10px; font-size:16px; cursor:pointer; font-weight:600;
+      height:auto; line-height:1.3
+    }
     .btn:hover{background:var(--brand-dark)}
     .meta{margin-top:2px;font-size:12px;color:#64748b;grid-column:1/-1}
 
@@ -109,13 +113,14 @@
   </div>
 
   <script>
-    // POST to your exact Getform endpoint; free plan = no custom redirect, so show inline success
+    // EXACT endpoint from your Getform "Copy" button:
     const ENDPOINT = "https://getform.io/f/ayveypob";
+
     const form = document.getElementById("leadForm");
     const statusBox = document.getElementById("status");
 
     form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+      e.preventDefault();             // stay on this page
       statusBox.className = "status"; // reset
       statusBox.style.display = "none";
 
@@ -148,4 +153,3 @@
   </script>
 </body>
 </html>
-
