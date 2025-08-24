@@ -25,12 +25,11 @@
     .hero p{margin:0;opacity:.95;font-size:clamp(14px,2.2vw,18px)}
 
     /* WRAP + CARD */
-    .wrap{max-width:1000px;margin:-20px auto 40px;padding:0 16px} /* <-- gentler overlap */
-    .card{
-      background:var(--card); border-radius:16px; padding:24px;
-      box-shadow:0 18px 40px rgba(15,23,42,.15);
-      display:grid; grid-template-columns: 1.2fr .8fr; gap:20px;
-    }
+    .wrap{
+  max-width:1000px;
+  margin:20px auto 40px;   /* positive margin, adds space under purple */
+  padding:0 16px;
+}
     @media (max-width:900px){ .card{grid-template-columns:1fr} }
 
     .intro h2{margin:0 0 10px; color:var(--ink); font-size:clamp(22px,2.6vw,28px)}
@@ -154,3 +153,4 @@
   </script>
 </body>
 </html>
+
