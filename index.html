@@ -14,10 +14,10 @@
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
 
-    /* HERO (shrunk so it won't cover the form) */
+    /* HERO (shorter so it won't cover the form) */
     .hero{
       position:relative; overflow:hidden; color:#fff; text-align:center;
-      padding:56px 16px 64px; /* smaller bottom padding so nothing is hidden */
+      padding:56px 16px 40px; /* <-- reduced bottom padding */
       background:linear-gradient(135deg,rgba(37,99,235,.92),rgba(124,58,237,.92)),
                  url('https://images.unsplash.com/photo-1582582429416-90cb8f1cba2d?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
     }
@@ -25,7 +25,7 @@
     .hero p{margin:0;opacity:.95;font-size:clamp(14px,2.2vw,18px)}
 
     /* WRAP + CARD */
-    .wrap{max-width:1000px;margin:-48px auto 40px;padding:0 16px} /* overlaps a bit for nice effect */
+    .wrap{max-width:1000px;margin:-20px auto 40px;padding:0 16px} /* <-- gentler overlap */
     .card{
       background:var(--card); border-radius:16px; padding:24px;
       box-shadow:0 18px 40px rgba(15,23,42,.15);
@@ -80,12 +80,12 @@
       </div>
 
       <form id="leadForm" novalidate>
-        <input type="text"  name="name"  placeholder="Full Name" required>
-        <input type="tel"   name="phone" placeholder="Phone Number" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <input type="text"  name="zip"   placeholder="ZIP Code" required>
+        <input type="text"  name="name"  placeholder="Full Name" required aria-label="Full Name">
+        <input type="tel"   name="phone" placeholder="Phone Number" required aria-label="Phone Number">
+        <input type="email" name="email" placeholder="Email Address" required aria-label="Email Address">
+        <input type="text"  name="zip"   placeholder="ZIP Code" required aria-label="ZIP Code">
 
-        <select name="credit_score" required>
+        <select name="credit_score" required aria-label="Credit score range">
           <option value="" disabled selected>Credit score range</option>
           <option>650–699</option>
           <option>700–749</option>
@@ -94,7 +94,7 @@
           <option>Prefer not to say</option>
         </select>
 
-        <textarea name="message" placeholder="Tell us about your project (optional)"></textarea>
+        <textarea name="message" placeholder="Tell us about your project (optional)" aria-label="Project details"></textarea>
 
         <!-- simple bot trap -->
         <input type="text" name="_gotcha" style="display:none" autocomplete="off">
@@ -116,6 +116,7 @@
     // EXACT endpoint from your Getform "Copy" button:
     const ENDPOINT = "https://getform.io/f/ayveypob";
 
+    // Free plan tip: you can submit only once per minute per IP (429 = rate limit)
     const form = document.getElementById("leadForm");
     const statusBox = document.getElementById("status");
 
