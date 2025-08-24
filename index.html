@@ -37,4 +37,96 @@
     form textarea{min-height:110px; grid-column:1/-1; resize:vertical}
     .btn{
       grid-column:1/-1; background:var(--brand); color:#fff; border:none;
-      padding:14px 16px
+      padding:14px 16px; border-radius:10px; font-size:17px; cursor:pointer; font-weight:600
+    }
+    .btn:hover{background:var(--brand-dark)}
+    .meta{margin-top:6px;font-size:12px;color:#64748b;grid-column:1/-1}
+    .status{margin-top:14px;grid-column:1/-1;border-radius:10px;padding:14px;border:1px solid transparent}
+    .status.ok{background:var(--ok-bg);border-color:var(--ok-bd);color:var(--ok)}
+    .status.err{background:var(--err-bg);border-color:var(--err-bd);color:var(--err)}
+    .footer{max-width:980px;margin:10px auto 40px;padding:0 16px;text-align:center;color:#475569}
+    .footer a{color:var(--brand);text-decoration:none;margin:0 8px}
+    @media (max-width:640px){ form{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Central Florida Bath</h1>
+    <p>Expert Shower & Bath Remodels • Ocala • The Villages • Gainesville</p>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <h2>Get Your Free Quote</h2>
+
+      <form id="leadForm" novalidate>
+        <input type="text"  name="name"  placeholder="Full Name" required>
+        <input type="tel"   name="phone" placeholder="Phone Number" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="text"  name="zip"   placeholder="ZIP Code" required>
+
+        <select name="credit_score" required>
+          <option value="" disabled selected>Credit score range</option>
+          <option>650–699</option>
+          <option>700–749</option>
+          <option>750+</option>
+          <option>Below 650</option>
+          <option>Prefer not to say</option>
+        </select>
+
+        <textarea name="message" placeholder="Tell us about your project (optional)"></textarea>
+
+        <!-- simple bot trap -->
+        <input type="text" name="_gotcha" style="display:none" autocomplete="off">
+
+        <button class="btn" type="submit">Submit</button>
+        <div id="status" class="status" style="display:none"></div>
+        <div class="meta">By submitting, you agree we may contact you by phone, SMS, or email. No spam.</div>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="tel:+13525551212">Call (352) 555-1212</a> •
+    <a href="mailto:info@centralfloridabath.com">info@centralfloridabath.com</a> •
+    <a href="/faq.html">FAQ</a> • <a href="/blog.html">Blog</a>
+  </div>
+
+  <script>
+    // Free plan: no custom redirect; use fetch + inline success message
+    const ENDPOINT = "https://getform.io/f/4yveypob"; // exact endpoint from your Getform dashboard
+    const form = document.getElementById("leadForm");
+    const statusBox = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusBox.style.display = "none";
+      const data = new FormData(form);
+      data.append("_subject","New Central Florida Bath Lead");
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: data
+        });
+
+        if (res.ok) {
+          form.reset();
+          statusBox.className = "status ok";
+          statusBox.textContent = "Thanks! We received your request and will call you within 24 hours.";
+          statusBox.style.display = "block";
+        } else {
+          statusBox.className = "status err";
+          statusBox.textContent = "Oops—something went wrong. Please try again or call (352) 555-1212.";
+          statusBox.style.display = "block";
+        }
+      } catch (err) {
+        statusBox.className = "status err";
+        statusBox.textContent = "Network error. Please try again or call (352) 555-1212.";
+        statusBox.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
