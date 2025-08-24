@@ -25,9 +25,11 @@
     <h2>Get Your Free Quote</h2>
   <form action="https://getform.io/f/4yveypob" method="POST">
   <input type="text" name="name" placeholder="Full Name" required>
-  <input type="tel" name="phone" placeholder="Phone Number" required>
+  <form action="https://getform.io/f/4yveypob" method="POST">
+  <input type="text" name="name"  placeholder="Full Name" required>
+  <input type="tel"  name="phone" placeholder="Phone Number" required>
   <input type="email" name="email" placeholder="Email Address" required>
-  <input type="text" name="zip" placeholder="ZIP Code" required>
+  <input type="text"  name="zip"   placeholder="ZIP Code" required>
 
   <select name="credit_score" required>
     <option value="" disabled selected>Credit score range</option>
@@ -40,10 +42,9 @@
 
   <textarea name="message" placeholder="Tell us about your project"></textarea>
 
-  <!-- optional: redirect after submission -->
+  <input type="hidden" name="_subject"  value="New Central Florida Bath Lead">
   <input type="hidden" name="_redirect" value="https://www.centralfloridabath.com/thankyou.html">
+  <input type="text"   name="_gotcha"   style="display:none"> <!-- bot trap -->
 
   <button type="submit">Submit</button>
 </form>
-
-
